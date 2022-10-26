@@ -17,7 +17,7 @@ const FlexContainer = styled.div`
 // ----------------------------------
 
 function App() {
-  const [pokemon, setPokemon] = useState({
+  const [pokemon, setPokemon] = useState([{
     name: "Pichu",
     type: "Electric",
     evolved: false,
@@ -26,9 +26,8 @@ function App() {
     image:
       "https://archives.bulbagarden.net/media/upload/thumb/b/b9/172Pichu.png/250px-172Pichu.png",
     id: 0,
-  });
-
-  const [pokemon1, setPokemon1] = useState({
+  },
+  {
     name: "Ralts",
     type: "Psychic, Fairy",
     evolved: false,
@@ -36,35 +35,20 @@ function App() {
     color: "pink",
     image:
       "https://archives.bulbagarden.net/media/upload/thumb/e/e1/280Ralts.png/250px-280Ralts.png",
-    id: 0,
-  });
+    id: 0
+  }]
+);
 
-  const [pokemon2, setPokemon2] = useState({
-    name: "Murkrow",
-    type: "Dark",
-    evolved: false,
-    weight: 4,
-    color: "gray",
-    image:
-      "https://archives.bulbagarden.net/media/upload/thumb/3/33/198Murkrow.png/250px-198Murkrow.png",
-    id: 0,
-  });
-
-  // Para fazer seus próximos pokemons, crie novos estados!
-  // const a = [{name: 1}, {name: 2}, {name: 3}];
-
-  // const list = a.map((index) => 
-  //   <p>{index.name}</p>
-  // );
+const list = pokemon.map((poke) => <PokemonCard pokemon={pokemon} setPokemon={setPokemon} currentPoke={poke}/> )
 
   return (
     <>
       <GlobalStyles />
       <FlexContainer>
         {/* Aqui neste componente, passe as props. Lembre-se que também é possivel passar a função de setState via props! */}
-        <PokemonCard pokemon={pokemon} setPokemon={setPokemon} />
-        <PokemonCard pokemon={pokemon1} setPokemon={setPokemon1} />
-        <PokemonCard pokemon={pokemon2} setPokemon={setPokemon2} />
+        <>
+        {list}
+        </>
         {/* Crie aqui seus próximos pokemons! */}
       </FlexContainer>
     </>
@@ -73,24 +57,3 @@ function App() {
 
 export default App;
 
-// const [pokemon, setPokemon] = useState([{
-//     name: "Pichu",
-//     type: "Electric",
-//     evolved: false,
-//     weight: 2,
-//     color: "yellow",
-//     image:
-//       "https://archives.bulbagarden.net/media/upload/thumb/b/b9/172Pichu.png/250px-172Pichu.png",
-//     id: 0,
-//   },
-//   {
-//     name: "Ralts",
-//     type: "Psychic, Fairy",
-//     evolved: false,
-//     weight: 6,
-//     color: "pink",
-//     image:
-//       "https://archives.bulbagarden.net/media/upload/thumb/e/e1/280Ralts.png/250px-280Ralts.png",
-//     id: 0
-//   }]
-// );

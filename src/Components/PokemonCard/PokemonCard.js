@@ -2,40 +2,40 @@ import { Card, PokemonName, PokemonType, EvolveButton } from "./styles";
 import React from "react";
 
 const PokemonCard = (props) => {
-  const { image, name, type, weight, color } = props.pokemon;
+  const { image, name, type, weight, color, evolved } = props.currentPoke;
 
-  const evoluirPokemon = () => {
-    console.log("Cliquei no botão de evoluir");
+  const evoluirPokemon = (current) => {
+    // const [filtered] = props.pokemon.filter(
+    //   (poke) => poke.name === current.name
+    // );'
 
-    if (props.pokemon.name === "Pichu") {
-      props.setPokemon({
-        ...props.pokemon,
+    const pokemon = props.pokemon.filter(
+      (poke) => poke.name !== current.name
+    );
+
+    if (current.name === 'Pichu') {
+      const currentPokemon = {
+        ...current,
         name: "Pikachu",
         weight: 6,
         evolved: true,
         image:
           "https://archives.bulbagarden.net/media/upload/thumb/0/0d/025Pikachu.png/250px-025Pikachu.png",
-      });
-    } else if (props.pokemon.name === "Ralts") {
-      props.setPokemon({
-        ...props.pokemon,
+      } 
+      props.setPokemon([currentPokemon, ...pokemon])
+    } else if (current.name === 'Ralts'){
+      const currentPokemon = {
+        ...current,
         name: "Kirlia",
         weight: 8,
         evolved: true,
         image:
           "https://archives.bulbagarden.net/media/upload/thumb/0/00/281Kirlia.png/250px-281Kirlia.png",
-      });
-    } else if (props.pokemon.name === "Murkrow") {
-      props.setPokemon({
-        ...props.pokemon,
-        name: "Honchkrow",
-        weight: 14,
-        evolved: true,
-        image:
-          "https://archives.bulbagarden.net/media/upload/thumb/4/46/430Honchkrow.png/250px-430Honchkrow.png",
-      });
+      }
+      props.setPokemon([...pokemon, currentPokemon])
     }
   };
+
 
   return (
     <Card color={color}>
@@ -43,8 +43,11 @@ const PokemonCard = (props) => {
       <PokemonName>{name}</PokemonName>
       <PokemonType>{type}</PokemonType>
       <p>{weight}kg</p>
+      <p>{evolved ? "Sim" : "Não"}</p>
 
-      <EvolveButton onClick={() => evoluirPokemon()}>Evoluir!</EvolveButton>
+      <EvolveButton onClick={() => evoluirPokemon(props.currentPoke)}>
+        Evoluir!
+      </EvolveButton>
     </Card>
   );
 };
